@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <!--
+     ! Mapper classes
+     !-->
+	<bean id="dataMapper" class="com.ideature.loanapp.service.FundingRequestDataMapper" >
+	</bean>
+
+	<bean id="mapper"
+  			class="net.sf.dozer.util.mapping.DozerBeanMapper" scope="singleton" >
+  		<property name="mappingFiles">
+    		<list>
+      			<value>loanapp-dozer-global-configuration.xml</value>
+      			<value>loanapp-dozer-bean-mapper-loan.xml</value>
+      			<value>loanapp-dozer-bean-mapper-borrower.xml</value>
+      			<value>loanapp-dozer-bean-mapper-funding.xml</value>
+    		</list>
+  		</property>
+	</bean>
+
+</beans>

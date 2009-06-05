@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/integrationtesting/java"/>
+	<classpathentry kind="src" path="src/test/unittesting/java"/>
+	<classpathentry excluding="spring/|log4j/|schema/" kind="src" path="etc"/>
+	<classpathentry kind="src" path="etc/spring"/>
+	<classpathentry kind="src" path="etc/log4j"/>
+	<classpathentry kind="src" path="etc/schema"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/spring-test.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/persistence.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/spring-oxm-1.0.3.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/spring-xml-1.0.3.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/spring-oxm-tiger-1.0.3.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/toplink-essentials.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/dozer-4.2.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jbosscache-core.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jboss-javaee.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jgroups.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/jboss-common-core.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/acegi-security-1.0.6.jar"/>
+	<classpathentry kind="lib" path="target/war/WEB-INF/lib/ehcache-1.2.4.jar"/>
+	<classpathentry kind="output" path="target/war/WEB-INF/classes"/>
+</classpath>
