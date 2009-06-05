@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<funding-request>
+	<loan-info id="12345">
+		<product>
+			<product-id>100</product-id>
+			<product-group>FIXED</product-group>
+		</product>
+		<!-- 
+		<rate>
+			<int-rate>6.5</int-rate>
+			<price>100.5</price>
+		</rate>
+		 -->
+		<loan-amount>300000</loan-amount>
+		<purchase-price>300000</purchase-price>
+		<loan-status>UWAPPROVED</loan-status>
+		<property-address>123 MAIN STREET</property-address>
+	</loan-info>
+
+	<borrower>
+		<first-name>Test</first-name>
+		<last-name>Borrower</last-name>
+	</borrower>
+
+	<funding-info>
+		<fund-type>30 Year Amortization</fund-type>
+		<funding-amount>240000</funding-amount>
+		<first-payment-date>07/01/2008</first-payment-date>
+		<terminmonths>360</terminmonths>
+		<monthlypayment>2500</monthlypayment>
+	</funding-info>
+
+</funding-request>

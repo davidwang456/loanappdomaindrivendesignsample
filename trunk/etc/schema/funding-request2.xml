@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<funding-request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="file:C:/dev/projects/ResearchLabs/SpringProjects/DomainDrivenDevelopmentInPractice/LoanAppDomainDrivenDesign/etc/schema/funding-request.xsd">
+  <loan-info id="0">
+    <product>
+      <product-id>0</product-id>
+      <product-group>product-group</product-group>
+    </product>
+    <loan-amount>0.0</loan-amount>
+    <purchase-price>0.0</purchase-price>
+    <loan-status>loan-status</loan-status>
+    <property-address>property-address</property-address>
+  </loan-info>
+  <borrower>
+    <borrower-type>borrower-type</borrower-type>
+    <first-name>first-name</first-name>
+    <last-name>last-name</last-name>
+    <phone-number>phone-number</phone-number>
+    <email-address>email-address</email-address>
+  </borrower>
+  <funding-info>
+    <fund-type>fund-type</fund-type>
+    <funding-amount>0</funding-amount>
+    <first-payment-date>0.0</first-payment-date>
+    <terminmonths>0</terminmonths>
+    <monthlypayment>0.0</monthlypayment>
+  </funding-info>
+</funding-request>
