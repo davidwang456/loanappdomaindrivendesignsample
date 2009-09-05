@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="fundingService"
+			class="com.ideature.loanapp.service.FundingServiceImpl"/>
+
+  	<bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    	<property name="interceptorNames">
+	        <list>
+	           <value>businessMethodSecurityInterceptor</value>
+	        </list>
+     	</property>
+     	<property name="beanNames">
+        	<list>
+          		<value>fundingService</value>
+        	</list>
+     	</property>
+     	<property name="proxyTargetClass" value="true"/>
+  	</bean>
+
+	<bean id="businessMethodSecurityInterceptor"
+			class="org.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor">
+		<property name="authenticationManager">
+			<ref bean="authenticationManager"/>
+		</property>
+		<property name="accessDecisionManager">
+			<ref local="businessAccessDecisionManager"/>
+		</property>
+		<property name="objectDefinitionSource">
+			<value>
+				com.ideature.loanapp.service.FundingService.get*=ROLE_READONLY
+				com.ideature.loanapp.service.FundingService.process*=ROLE_FUNDING_PROCESSOR
+				com.ideature.loanapp.service.FundingService.approve*=ROLE_FUNDING_PROCESSING_MANAGER
+			</value>
+		</property>
+	</bean>
+
+  	<bean id="authenticationManager"
+    		class="org.acegisecurity.providers.ProviderManager">
+     	<property name="providers">
+        	<list>
+           		<ref local="daoAuthenticationProvider"/>
+        	</list>
+     	</property>
+  	</bean>
+
+	<bean id="daoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService">
+			<ref local="inMemoryDaoImpl"/>
+		</property>
+      	<property name="userCache" ref="userCache"/>
+	</bean>
+
+	<bean id="inMemoryDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
+		<property name="userMap">
+	    	<value>
+	      		borrower=test,ROLE_READONLY
+	      		processor=test1,ROLE_READONLY,ROLE_FUNDING_PROCESSOR
+	      		manager=test2,ROLE_READONLY,ROLE_FUNDING_PROCESSOR,ROLE_FUNDING_PROCESSING_MANAGER
+	    	</value>
+	  	</property>
+	</bean>	
+
+	<bean id="userCache" class="org.acegisecurity.providers.dao.cache.EhCacheBasedUserCache">
+		<property name="cache">
+			<bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+				<property name="cacheManager">
+					<bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
+				</property>
+				<property name="cacheName" value="userCache" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- This bean is optional; it isn't used by any other bean as it only listens and logs -->
+	<bean id="loggerListener" class="org.acegisecurity.event.authentication.LoggerListener" />
+
+	<bean id="businessAccessDecisionManager"
+			class="org.acegisecurity.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions">
+			<value>false</value>
+		</property>
+      	<property name="decisionVoters">
+        	<list>
+            	<bean class="org.acegisecurity.vote.RoleVoter" />
+         	</list>
+      	</property>
+	</bean>
+
+</beans>

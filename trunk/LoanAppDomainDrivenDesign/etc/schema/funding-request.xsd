@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		elementFormDefault="qualified" 
+		attributeFormDefault="unqualified">
+
+<!--
+*********************************************
+* Root node
+*********************************************
+-->
+   <xs:element name="funding-request" type="FundingRequest">
+   </xs:element>
+<!--
+*********************************************
+* FundingRequest
+*********************************************
+-->
+   <xs:complexType name="FundingRequest">
+      <xs:sequence>
+         <xs:element name="loan-info" type="LoanInfo" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="borrower" type="Borrower" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="funding-info" type="FundingInfo" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+<!--
+*********************************************
+* LoanInfo
+*********************************************
+-->
+	<xs:complexType name="LoanInfo">
+    	<xs:sequence>
+      		<xs:element name="product" type="Product" minOccurs="0" maxOccurs="unbounded"/>
+         	<xs:element name="loan-amount" type="xs:double" minOccurs="0" maxOccurs="unbounded"/>
+         	<xs:element name="purchase-price" type="xs:double" minOccurs="0" maxOccurs="unbounded"/>
+         	<xs:element name="loan-status" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         	<xs:element name="property-address" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      	</xs:sequence>
+      	<xs:attribute name="id" type="xs:integer"/>
+   	</xs:complexType>
+<!--
+*********************************************
+* Product
+*********************************************
+-->
+   <xs:complexType name="Product">
+      <xs:sequence>
+         <xs:element name="product-id" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="product-group" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+	</xs:complexType>
+<!--
+*********************************************
+* Borrower
+*********************************************
+-->
+   <xs:complexType name="Borrower">
+      <xs:sequence>
+         <xs:element name="borrower-type" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="first-name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="last-name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="phone-number" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="email-address" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+<!--
+*********************************************
+* FundingInfo
+*********************************************
+-->
+   <xs:complexType name="FundingInfo">
+      <xs:sequence>
+         <xs:element name="fund-type" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="funding-amount" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="first-payment-date" type="xs:double" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="terminmonths" type="xs:integer" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element name="monthlypayment" type="xs:double" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+
+</xs:schema>
