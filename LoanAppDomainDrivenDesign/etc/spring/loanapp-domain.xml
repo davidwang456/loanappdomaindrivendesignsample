@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   	xmlns:context="http://www.springframework.org/schema/context"
+	   	xmlns:tx="http://www.springframework.org/schema/tx"
+	   	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   	http://www.springframework.org/schema/context 
+	   		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       	http://www.springframework.org/schema/tx
+       		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+       
+    <context:load-time-weaver/>
+
+	<!-- We want to use Spring's declarative @Transaction management -->
+	<tx:annotation-driven/>
+
+    <!--
+     ! Service classes
+     !-->
+	<bean id="fundingService" class="com.ideature.loanapp.service.FundingServiceImpl" >
+		<property name="loan" ref="loan"/>
+		<property name="borrower" ref="borrower"/>
+		<property name="fundingRequest" ref="fundingRequest"/>
+	</bean>
+
+    <!--
+     ! Entity classes
+     !-->
+	<bean id="loan" class="com.ideature.loanapp.domain.Loan" >
+		<property name="loanRepository" ref="loanRepository"/>
+	</bean>
+
+	<bean id="borrower" class="com.ideature.loanapp.domain.Borrower" >
+		<property name="borrowerRepository" ref="borrowerRepository"/>
+	</bean>
+
+	<bean id="fundingRequest" class="com.ideature.loanapp.domain.FundingRequest" >
+		<property name="fundingRequestRepository" ref="fundingRequestRepository"/>
+	</bean>
+
+	<bean id="productRate" class="com.ideature.loanapp.domain.ProductRate" >
+		<property name="productRateRepository" ref="productRateRepository"/>
+	</bean>
+
+</beans>

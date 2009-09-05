@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   	xmlns:context="http://www.springframework.org/schema/context"
+	   	xmlns:tx="http://www.springframework.org/schema/tx"
+	   	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   	http://www.springframework.org/schema/context 
+	   		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       	http://www.springframework.org/schema/tx
+       		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+       
+    <context:load-time-weaver/>
+
+	<!-- We want to use Spring's declarative @Transaction management -->
+	<tx:annotation-driven/>
+
+	<!--  Load the JDBC Properties  -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties"/>
+	</bean>
+
+    <!--
+     ! Repository classes
+     !-->
+	<bean id="loanRepository" class="com.ideature.loanapp.repository.LoanRepositoryJpaImpl" />
+	<bean id="borrowerRepository" class="com.ideature.loanapp.repository.BorrowerRepositoryJpaImpl" />
+	<bean id="fundingRequestRepository" class="com.ideature.loanapp.repository.FundingRequestRepositoryJpaImpl" />
+	<bean id="productRateRepository" class="com.ideature.loanapp.repository.ProductRateRepositoryJpaImpl" />
+
+	<!-- Configure the JDBC datasource. Use the in-container datasource
+		 (retrieved via JNDI) in the production environment. -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+
+	<!-- Configure the entity manager. -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+    	<property name="persistenceUnitName" value="LoanAppDB"/>
+
+		<property name="dataSource" ref="dataSource"/>
+		<property name="loadTimeWeaver">
+		  <!--  InstrumentationLoadTimeWeaver expects you to start the appserver with
+		         -javaagent:/Java/workspace2/spring/dist/weavers/spring-agent.jar
+		   -->
+		  <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+		</property>
+
+		<!--  JPA Adapter  -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter">
+				<property name="databasePlatform"
+						value="oracle.toplink.essentials.platform.database.HSQLPlatform"/>
+				<property name="generateDdl" value="true"/>
+				<property name="showSql" value="true" />
+			</bean>
+
+			<!--
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />
+				<property name="generateDdl" value="true" />
+				<property name="showSql" value="true" />
+			</bean>
+			-->
+
+		</property>
+	</bean>
+
+	<!-- A simple transaction manager for our (single) EntityManagerFactory.  -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- This makes Spring perform the magic @PersistenceContext/@PersitenceUnit injection -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+</beans>
