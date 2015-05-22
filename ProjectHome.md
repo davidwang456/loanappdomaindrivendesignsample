@@ -1,0 +1,1 @@
+very good ddd and osgi sample
